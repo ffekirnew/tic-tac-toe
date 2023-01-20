@@ -7,9 +7,10 @@
     --clr-warning: #FED049;
     --clr-danger: #FF4848;
 
+    --ff-archivo-black: 'Archivo Black', sans-serif;
     --ff-comfortaa: 'Comfortaa', cursive;
     --ff-fredoka-one: 'Fredoka One', cursive;
-    --ff-raleway-dots: 'Raleway Dots', cursive;
+    --ff-sofia-sans: 'Sofia Sans', sans-serif;;
 
     --fw-light: 400;
     --fw-regular: 500;
@@ -18,7 +19,7 @@
     --fs-small: 1.2rem;
     --fs-medium: 1.5rem;
     --fs-large: 1.8rem;
-    --fs-extra: 3rem;
+    --fs-extra: 4.5rem;
 }
 
 * {
@@ -102,7 +103,7 @@ button.buttons__reset {
     background-color: var(--clr-bg-primary);
     color: var(--clr-bg-primary);
     font-family: var(--ff-fredoka-one);
-    font-weight: var(--fw-regular);
+    font-weight: var(--fw-light);
     font-size: var(--fs-extra);
 }
 
@@ -133,7 +134,9 @@ button.buttons__reset {
 
 .blink {
     background-color: var(--clr-bg-primary);
-    animation: animate 0.6s infinite;
+    animation: animate;
+    animation-iteration-count: 2;
+    animation-duration: 0.5s;
 }
 
 @keyframes animate {
@@ -147,23 +150,25 @@ button.buttons__reset {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
-    position: relative;
     color: var(--clr-primary);
-    font-family: var(--ff-raleway-dots);
+    font-family: var(--ff-comfortaa);
+    font-weight: var(--fw-light);
     padding: 1rem;
+    border: 1px solid var(--clr-primary);
+    border-radius: 0.4rem;
 }
 
 .stats_container__card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
 
 .stats_container__card h2 {
+    text-transform: capitalize;
     font-size: var(--fs-medium);
     font-weight: var(--fw-bold);
 }
@@ -175,8 +180,10 @@ button.buttons__reset {
 
 @media (max-width: 445.07px) {
     .stats_container {
-        width: 90%;
+        width: 80%;
         grid-template-columns: 1fr;
+        margin: 1rem auto;
+        border: unset;
     }
 
     .stats_container__card {
