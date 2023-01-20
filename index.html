@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&family=Fredoka+One&family=Raleway+Dots&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Tic-Tac-Toe</title>
+    <script defer src="./main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">
+            <button class="buttons__restart" onclick="start()">Restart</button>
+            <button class="buttons__reset" onclick="reset()">Reset</button>
+        </div>
+        <div class="play_container" id="play_container">
+            <div class="play_container__cell"><p>X</p></div>
+            <div class="play_container__cell"><p>X</p></div>
+            <div class="play_container__cell"><p>X</p></div>
+            <div class="play_container__cell"><p>X</p></div>
+            <div class="play_container__cell"><p>X</p></div>
+            <div class="play_container__cell"><p>O</p></div>
+            <div class="play_container__cell"><p>O</p></div>
+            <div class="play_container__cell"><p>O</p></div>
+            <div class="play_container__cell"><p>O</p></div>
+        </div>
+        <div class="stats_container">
+            <div class="stats_container__card">
+                <h2>Player X:</h2>
+                <p id="player-1-score">0</p>
+            </div>
+            <div class="stats_container__card">
+                <h2>Tie:</h2>
+                <p id="tie-score">0</p>
+            </div>
+            <div class="stats_container__card">
+                <h2>Player O:</h2>
+                <p id="player-2-score">0</p>
+            </div>
+        </div>
+    </div>
+    <div id="message">
+    </div>
+</body>
+</html>
