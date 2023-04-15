@@ -1,3 +1,49 @@
+function minimax(gameState, maximizingPlayer, turn) {
+    if (isGameOver(gameState)) {
+        return maximizingPlayer == turn ? 1 : -1;
+    }
+
+    if (maximizingPlayer != turn) {
+        let maxValue = -Infinity;
+        let bestMove;
+
+        for (let i = 0; i < 9; i++) {
+            if (gameState[i] === null) {
+                gameState[i] = turn % 2;
+                let currScore = minimax(gameState, false, (turn + 1) % 2);
+
+                if (currScore > maxValue) {
+                    maxValue = currScore;
+                    bestMove = i;
+                }
+                gameState[i] = null;
+            }
+        } 
+
+        return bestMove;
+    }
+    
+    else {
+        let minValue = Infinity;
+        let bestMove;
+
+        for (let i = 0; i < 9; i++) {
+            if (gameState[i] === null) {
+                gameState[i] = turn % 2;
+                let currScore = minimax(gameState, true, (turn + 1) % 2);
+
+                if (currScore < minValue) {
+                    minValue = currScore;
+                    bestMove = i;
+                }
+                gameState[i] = null;
+            }
+        } 
+
+        return bestMove;
+    }
+}
+
 function makeAMove(i, cell) {
     if (gameIsOn) {
         if (gameBoard[i] == 0 || gameBoard[i] == 1) {
@@ -9,26 +55,45 @@ function makeAMove(i, cell) {
             gameBoard[i] = turn % 2;
             messageElement.innerHTML = "";
             turn += 1;
+
+            // console.log(cells);
+            // let gameState = [...gameBoard]
+            let bestPlace = minimax(gameBoard, true, 1);
+            cells[bestPlace].innerHTML = playButtons[turn % 2];
+            cells[bestPlace].classList.add('played');
+            gameBoard[bestPlace] = turn % 2;
+            turn += 1;
         }
     } else {
         start();
     }
 }
 
-function checkIfGameIsWon(gameBoard, turn) {
+function aiMakeMove() {
+}
+
+function isGameOver(board) {
     const winningLines = [[0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],[1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6],];
     let lineIdx, line, potential;
-
+    
     for (lineIdx = 0; lineIdx < winningLines.length; lineIdx++) {
         line = winningLines[lineIdx];
         potential = gameBoard[line[0]] === gameBoard[line[1]] && gameBoard[line[1]] === gameBoard[line[2]] && gameBoard[line[0]] !== null;
         if (potential)
-            break;
+            return true, line;
     }
 
-    if (potential) {
+    return false;
+
+}
+
+function checkIfGameIsWon(gameBoard, turn) {
+    status = isGameOver(gameBoard)[0];
+    line = isGameOver(gameBoard)[1];
+
+    if (isGameOver(gameBoard)) {
         messageElement.classList = ["won"];
-        messageElement.innerHTML = "Game is won by Player " + playButtons[(turn - 1) % 2] + ".";
+        messageElement.innerHTML = "Game is won by Player " + playButtons[(turn) % 2] + ".";
 
         gameIsOn = false;
         currentWinner = (turn - 1) % 2;
@@ -43,6 +108,8 @@ function checkIfGameIsWon(gameBoard, turn) {
         } else if (playButtons[(turn - 1) % 2] == "O") {
             player2Score.innerHTML = parseInt(player2Score.innerHTML) + 1;
         }
+
+        return true;
     } else if (turn && turn % 9 == 0) {
         messageElement.classList = ["tie"];
         messageElement.innerHTML = "Game ends as a tie. Click anywhere in the gameBoard to start a new game.";
@@ -50,14 +117,14 @@ function checkIfGameIsWon(gameBoard, turn) {
         gameIsOn = false;
         currentWinner = 2;
         tieScore.innerHTML = parseInt(tieScore.innerHTML) + 1;
+        return true;
     }
+
+    return false;
 }
 
 function start() {
     turn = 0;
-    let temp = playButtons[0];
-    playButtons[0] = playButtons[1];
-    playButtons[1] = temp;
     gameIsOn = true;
     gameBoard = [ null, null, null, null, null, null, null, null, null ];
 
