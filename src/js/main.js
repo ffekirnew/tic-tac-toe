@@ -21,7 +21,7 @@ function minimax(board, maximizingPlayer, turn) {
             if (board[i] === null) {
                 board[i] = turn;
                 let score = minimax(board, false, 0)[1];
-                if (score > maxVal) {
+                if (score >= maxVal) {
                     bestMove = i;
                     maxVal = score;
                 }
@@ -38,7 +38,7 @@ function minimax(board, maximizingPlayer, turn) {
             if (board[i] === null) {
                 board[i] = turn;
                 let score = minimax(board, true, 1)[1];
-                if (score < minVal) {
+                if (score <= minVal) {
                     bestMove = i;
                     minVal = score;
                 }
