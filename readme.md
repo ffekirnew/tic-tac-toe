@@ -1,3 +1,3 @@
 # tic-tac-toe
 
-Play the game: https://ffekirnew.github.io/tic-tac-toe/src/
+Play the game (MiniMax agent [you will never win!]): https://ffekirnew.github.io/tic-tac-toe/src/
