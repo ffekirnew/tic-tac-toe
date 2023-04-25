@@ -57,7 +57,7 @@ function makeAMove(i, cell) {
             messageElement.innerHTML = "That cell is already occupied!";
         } else {
             cell.classList.add('played');
-            cell.innerHTML = 'H';
+            cell.innerHTML = 'X';
             gameBoard[i] = 0;
             messageElement.innerHTML = "";
             turn += 1;
@@ -67,7 +67,7 @@ function makeAMove(i, cell) {
 
             let ai = minimax(gameBoard, true, 1);
             cells[ai[0]].classList.add('played');
-            cells[ai[0]].innerHTML = 'A';
+            cells[ai[0]].innerHTML = 'O';
             gameBoard[ai[0]] = turn % 2;
             messageElement.innerHTML = "";
             turn += 1;
